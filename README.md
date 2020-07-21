@@ -1,16 +1,26 @@
-# qr_code
+# Qr code App - Flutter
 
-A new Flutter application.
+<br>
 
-## Getting Started
+App Name : QR Code
+<br>
 
-This project is a starting point for a Flutter application.
+Create QR code.<br>
+Scan QR code.<br>
+Copy QR code text.<br>
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### A Glance
+<img align="left" src="https://user-images.githubusercontent.com/25722093/88038246-975ee180-cb63-11ea-955b-319c880a8d59.png" width=270 height=500>
+
+<img align="right" src="https://user-images.githubusercontent.com/25722093/88038355-b9f0fa80-cb63-11ea-97bc-fc6f6894743a.png" width=270 height=500>
+
+<img align="middle" src="(https://user-images.githubusercontent.com/25722093/88038291-a9408480-cb63-11ea-871f-50627ebdc554.png" width=270 height=500>
+
+
+
+<img align="left" src="https://user-images.githubusercontent.com/25722093/88038401-cb3a0700-cb63-11ea-8adc-cf7157bcc585.png" width=270 height=500>
+
+<img align="middle" src="https://user-images.githubusercontent.com/25722093/88038441-d68d3280-cb63-11ea-86d4-833cc34377b3.png" width=270 height=500>
+
