@@ -30,7 +30,7 @@ class TabBarScreen extends StatelessWidget {
           ),
           body: TabBarView(
             children: [
-              GenerateScreen(),
+              CreateQR(),
               ScanScreen()
             ],
           ),

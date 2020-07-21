@@ -1,66 +1,24 @@
 //import 'dart:html';
-import 'dart:typed_data';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-//
-//class CreateQR extends StatelessWidget {
-//  final TextEditingController _qRTextController = TextEditingController();
-//
-//  @override
-//  Widget build(BuildContext context) {
-//    return Padding(
-//        padding: const EdgeInsets.symmetric(horizontal: 20),
-//        child: Column(
-//            crossAxisAlignment: CrossAxisAlignment.start,
-//            children: <Widget>[
-//              Padding(
-//                padding: const EdgeInsets.only(
-//                    top: 20.0, right: 10.0, bottom: 10.0, left: 10.0),
-//                child: TextFormField(
-//                  textInputAction: TextInputAction.next,
-//                  style: TextStyle(color: Colors.black),
-//                  controller: _qRTextController,
-//                  decoration: InputDecoration(
-//                    labelText: "Enter Text to create QR code",
-//                    labelStyle: TextStyle(color: Colors.grey),
-//                    border: OutlineInputBorder(
-//                      borderRadius: BorderRadius.circular(5.0),
-//                      borderSide: new BorderSide(color: Colors.black),
-//                    ),
-//                  ),
-//                ),
-//              ),
-//              QrImage(
-//                data: "1213",
-//                version: QrVersions.auto,
-//                size: 320,
-//                gapless: true,
-//              )
-//            ]));
-//  }
-//}
 
-class GenerateScreen extends StatefulWidget {
-
+class CreateQR extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => GenerateScreenState();
+  State<StatefulWidget> createState() => CreateQRState();
 }
 
-class GenerateScreenState extends State<GenerateScreen> {
-
+class CreateQRState extends State<CreateQR> {
   static const double _topSectionTopPadding = 50.0;
   static const double _topSectionBottomPadding = 20.0;
   static const double _topSectionHeight = 50.0;
 
   GlobalKey globalKey = new GlobalKey();
-  String _dataString = "Hello from this QR";
+  String _dataString = "Welcome!!";
   String _inputErrorText;
-  final TextEditingController _textController =  TextEditingController();
+  final TextEditingController _textController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -70,18 +28,17 @@ class GenerateScreenState extends State<GenerateScreen> {
   }
 
   Future<void> _captureAndSharePng() async {
-    try {
-
-    } catch(e) {
+    try {} catch (e) {
       print(e.toString());
     }
   }
 
   _contentWidget() {
-    final bodyHeight = MediaQuery.of(context).size.height - MediaQuery.of(context).viewInsets.bottom;
-    return  Container(
+    final bodyHeight = MediaQuery.of(context).size.height -
+        MediaQuery.of(context).viewInsets.bottom;
+    return Container(
       color: const Color(0xFFFFFFFF),
-      child:  Column(
+      child: Column(
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.only(
@@ -90,16 +47,16 @@ class GenerateScreenState extends State<GenerateScreen> {
               right: 10.0,
               bottom: _topSectionBottomPadding,
             ),
-            child:  Container(
+            child: Container(
               height: _topSectionHeight,
-              child:  Row(
+              child: Row(
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   Expanded(
-                    child:  TextField(
+                    child: TextField(
                       controller: _textController,
-                      decoration:  InputDecoration(
+                      decoration: InputDecoration(
                         hintText: "Enter a text for QR code",
                         errorText: _inputErrorText,
                       ),
@@ -110,7 +67,7 @@ class GenerateScreenState extends State<GenerateScreen> {
                     child: RaisedButton(
                       color: Colors.orange,
                       onPressed: () {
-                        setState((){
+                        setState(() {
                           _dataString = _textController.text;
                           _inputErrorText = null;
                         });
@@ -123,7 +80,7 @@ class GenerateScreenState extends State<GenerateScreen> {
             ),
           ),
           Expanded(
-            child:  Center(
+            child: Center(
               child: RepaintBoundary(
                 key: globalKey,
                 child: QrImage(
