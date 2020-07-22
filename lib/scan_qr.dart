@@ -2,7 +2,8 @@ import 'package:barcode_scan/barcode_scan.dart';
 import 'package:barcode_scan/platform_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
+import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ScanScreen extends StatefulWidget {
   @override
@@ -32,16 +33,24 @@ class _ScanState extends State<ScanScreen> {
                     textColor: Colors.black,
                     splashColor: Colors.orangeAccent,
                     onPressed: scan,
-                    child: const Text('SCAN QR Code')
-                ),
-              )
-              ,
-
+                    child: const Text('SCAN QR Code')),
+              ),
               Padding(
                 padding: EdgeInsets.all(40),
-                child: SelectableText(barcode, textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold),),
-              )
-              ,
+                child: Linkify(
+                  onOpen: (link) async {
+                    if (await canLaunch(link.url)) {
+                      await launch(link.url);
+                    } else {
+                      throw 'Could not launch $link';
+                    }
+                  },
+                  text: barcode,
+                  style: TextStyle(
+                      color: Colors.orangeAccent, fontWeight: FontWeight.bold),
+                  linkStyle: TextStyle(color: Colors.black),
+                ),
+              ),
             ],
           ),
         ));
@@ -50,19 +59,33 @@ class _ScanState extends State<ScanScreen> {
   Future scan() async {
     try {
       ScanResult barcode = await BarcodeScanner.scan();
-      setState(() => this.barcode = barcode.rawContent);
+      setState(() => {
+      this.barcode = barcode.rawContent
+
+
+    }
+
+    );
+      setData(barcode.rawContent);
     } on PlatformException catch (e) {
-      if (e.code == BarcodeScanner.cameraAccessDenied) {
-        setState(() {
-          this.barcode = 'The user did not grant the camera permission!';
-        });
-      } else {
-        setState(() => this.barcode = 'Unknown error: $e');
-      }
-    } on FormatException{
-      setState(() => this.barcode = 'null (User returned using the "back"-button before scanning anything. Result)');
+    if (e.code == BarcodeScanner.cameraAccessDenied) {
+    setState(() {
+    this.barcode = 'The user did not grant the camera permission!';
+    });
+    } else {
+    setState(() => this.barcode = 'Unknown error: $e');
+    }
+    } on FormatException {
+    setState(() => this.barcode =
+    'null (User returned using the "back"-button before scanning anything. Result)');
     } catch (e) {
-      setState(() => this.barcode = 'Unknown error: $e');
+    setState(() => this.barcode = 'Unknown error: $e');
     }
   }
+
+  Future setData(link) async{
+    if (await canLaunch(link)) {
+    await launch(link);
+    }
+}
 }
